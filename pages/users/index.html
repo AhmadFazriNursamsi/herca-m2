@@ -1,0 +1,175 @@
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-light text-center rounded p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h4 class="mb-0"><i class="clr-blue fa fa-users me-2"></i> Users </h4>
+            <button type="button" id="btnAddUser" class="btn btn-sm btn-primary m-2" data-toggle="modal" data-target="#addUser"><i class="fa fa-plus me-2"></i>add user</button>
+        </div>
+        <div class="table-responsive">
+            <table id="userstable" class="table text-start table-striped align-middle table-bordered table-hover mb-0">
+                <thead>
+                	<tr>
+                		<td></td>
+		                <td><input type="text" class="form-control input-sm src_class_user" autocomplete="off" onkeyup="searcAjax(this)" name="name"></td>
+		                <td><input type="text" class="form-control input-sm src_class_user" autocomplete="off" onkeyup="searcAjax(this)" name="username"></td>
+		                <td><input type="text" class="form-control input-sm src_class_user" autocomplete="off" onkeyup="searcAjax(this)" name="email"></td>
+		                <td><input type="text" class="form-control input-sm src_class_user" autocomplete="off" onkeyup="searcAjax(this)" name="division"></td>
+		                <td><input type="text" class="form-control input-sm src_class_user date" id="daterangepicker" autocomplete="off" onchange="searcAjax(this)" name="joindate"></td>
+		                <td><input type="text" class="form-control input-sm src_class_user" autocomplete="off" onkeyup="searcAjax(this)" name="mobile"></td>
+		                <td><input type="text" class="form-control input-sm src_class_user" autocomplete="off" onkeyup="searcAjax(this)" name="active"></td>
+		                <td></td>
+		            </tr>
+		            <tr>
+		            	<th><input type="checkbox" class="checkall" name="checkall"></th>
+		                <th class="align-center">Name</th>
+		                <th class="align-center">Username</th>
+		                <th class="align-center">Email</th>
+		                <th class="align-center">Division</th>
+		                <th class="align-center">Join Date</th>
+		                <th class="align-center">Mobile</th>
+		                <th class="align-center">Active</th>
+		                <th class="align-center">Action</th>
+		            </tr>
+		            
+		        </thead>
+		        <tfoot>
+		            <tr>
+		            	<th></th>
+		                <th class="align-center">Name</th>
+		                <th class="align-center">Username</th>
+		                <th class="align-center">Email</th>
+		                <th class="align-center">Division</th>
+		                <th class="align-center">Join Date</th>
+		                <th class="align-center">Mobile</th>
+		                <th class="align-center">Active</th>
+		                <th class="align-center">Action</th>
+		            </tr>
+		        </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="addUserTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Add Post</h5>
+        <button type="button" id="closeModalAddUser" class="close-modal btn btn-sm btn-danger close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form-cst">
+        	<div class="input-group mb-3">
+			    <span class="input-group-text" id="basic-addon1"><i class="fa fa-user me-2"></i></span>
+			    <input type="text" class="form-control" required placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+			</div>
+			<div class="input-group mb-3">
+			    <span class="input-group-text" id="basic-addon1"><i class="fa fa-user-circle me-2"></i></span>
+			    <input type="text" class="form-control" required placeholder="Name" aria-label="Name" aria-describedby="basic-addon1">
+			</div>
+			<div class="input-group mb-3">
+			    <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope me-2"></i></span>
+			    <input type="email" class="form-control" required placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
+			</div>
+
+			<div class="input-group mb-3 text-right-cst">
+	        	<button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-plus me-2"></i> Add Post</button>
+	        </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+	$("#btnAddUser").click(function(){
+		$('#addUser').modal('show');
+	});
+
+    $("#closeModalAddUser").click(function(){
+        $("#addUser").modal('hide');
+    });
+
+
+
+    $(document).ready(function () {
+	   	var table = $('#userstable').DataTable({
+	        ajax: './jsondatas/user.txt',
+	        columnDefs: [
+	            {
+	                targets: 8,
+	                data: null,
+	                defaultContent: '\
+<div class="btn-group" role="group">\
+    <button type="button" data-toggle="tooltip" data-placement="top" title="View" class="btn btn-sm btn-warning cview"><i class="fa fa-eye"></i></button>\
+    <button type="button" data-toggle="tooltip" data-placement="top" title="Edit" class="btn btn-sm btn-success cedit"><i class="fa fa-edit"></i></button>\
+    <button type="button" data-toggle="tooltip" data-placement="top" title="Delete" class="btn btn-sm btn-danger cdel"><i class="fa fa-trash"></i></button>\
+</div>',
+	            }, {
+				   'targets': 0,
+				   'searchable':false,
+				   'orderable':false,
+				   'className': 'dt-body-center',
+				   'render': function (data, type, full, meta){
+				       return '<input type="checkbox" name="checkid['+full[8]+']" value="' + $('<div/>').text(data).html() + '">';
+				   }
+				}
+	        ],
+	        searching: false,
+	    }); 
+	   	var getndate = getNowdate(); // helpers
+	    $("#daterangepicker").val(getndate + ' - ' + getndate );
+
+
+	    $('#userstable tbody').on('click', '.cview', function () {
+	        var data = table.row($(this).parents('tr')).data();
+	        alert(data[8]+'view');
+	    });
+
+	    $('#userstable tbody').on('click', '.cedit', function () {
+	        var data = table.row($(this).parents('tr')).data();
+	       $('#addUser').modal('show');
+	        
+	    });
+
+	    $('#userstable tbody').on('click', '.cdel', function () {
+	        var data = table.row($(this).parents('tr')).data();
+	        alert(data[8]+'delete');
+	    });
+
+	    $('.checkall').change(function(){
+		    var cells = table.cells().nodes();
+		    // var cells2 = $('.checkall').cells().nodes();
+		    $( cells ).find(':checkbox').prop('checked', $(this).is(':checked'));
+		    // $( cells2 ).find(':checkbox').prop('checked', $(this).is(':checked'));
+		});
+
+	});
+
+
+	$(function() {
+		$("#daterangepicker").daterangepicker({
+			timePicker: false,
+			locale: {
+			  format: "DD/MM/YYYY"
+			}
+		});
+	});
+
+	function searcAjax(a){
+		
+		if($(a).val().length > global_length_src) {
+			var getparam = getAllClassAndVal("src_class_user"); // helpers
+			$('#userstable').DataTable().ajax.url("jsondatas/userreload.txt?"+getparam).load();
+		}
+		
+	}
+	
+</script>

@@ -1,0 +1,7 @@
+{
+    "data": [
+        ["", "Alex", "alexmarketing", "Uncategorized", "Marketing", "05/21/2005", "08775884515", "active", "1"],
+      	["", "Andri", "andriteknisi", "andriteknisi@gmail.com", "Teknisi", "05/21/2005", "08772115425", "active", "2"],
+      	["", "Sinta", "sintadesign", "sintadesign@gmail.com", "Design", "05/21/2005", "08778415255", "active", "3"]
+    ]
+}

@@ -1,0 +1,19 @@
+{
+    "data": {
+        "main_info_user" : {
+            "id":"1",
+            "Title":"Alex",
+            "Content":"alex marketing",
+            "Excerpt":"Uncategorized",
+            "Template":"Marketing",
+            "PostStatus":"05/21/2005",
+            "Slug":"08775884515",
+            "Category":"08775884515",
+            "active":"Active"
+        }, 
+        "plugin_info_user" : {
+          "user_access_product" : [1,5,4,5,6,7,8,9,15,17],
+          "user_access_branch" : [1,52,17]
+        }
+    }
+}

@@ -1,0 +1,13 @@
+.float-right-cst {
+    float: right;
+    display: block;
+}
+
+.text-right-cst {
+    text-align: right;
+    display: block;
+}
+
+.align-center {
+	text-align: center !important;
+}

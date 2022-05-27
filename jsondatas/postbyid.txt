@@ -1,0 +1,19 @@
+{
+    "data": {
+        "main_info_user" : {
+            "id":"1",
+            "title":"About Us",
+            "content":"Marketing",
+            "excerpt":"non marketing",
+            "template":"Marketing",
+            "postStatus":"05/21/2005",
+            "slug":"about-us",
+            "categori":"active",
+            "active":"0"
+        }, 
+        "plugin_info_user" : {
+          "user_access_product" : [1,5,4,5,6,7,8,9,15,17],
+          "user_access_branch" : [1,52,17]
+        }
+    }
+}
