@@ -1,608 +1,486 @@
 <style>
-  #editor-container{
-    height: 323px;
-  }
+#editor-container{
+height: 323px;
+}
 </style>
 <div class="container-fluid pt-4 px-4">
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-    <div class="bg-light text-center rounded p-4">
-        <div class="d-flex align-items-center justify-content-between mb-4">
-            <h4 class="mb-0"><i class="clr-blue fa fa-users me-2"></i> All Post </h4>
-            <button type="button" id="btnAddUser" class="btn btn-sm btn-primary m-2" data-toggle="modal" data-target="#addUser"><i class="fa fa-plus me-2"></i>Add New</button>
-        </div>
-        <div class="table-responsive">
-            <table id="userstable" class="table text-start table-striped align-middle table-bordered table-hover mb-0">
-                <thead>
-                    <tr>
-                        <td></td>
-                        <td><input type="text" class="form-control input-sm src_class_user" autocomplete="off" onkeyup="searcAjax(this)" name="title"></td>
-                        <td><input type="text" class="form-control input-sm src_class_user" autocomplete="off" onkeyup="searcAjax(this)" name="contenttt"></td>
-                        <td><input type="text" class="form-control input-sm src_class_user" autocomplete="off" onkeyup="searcAjax(this)" name="excerpt"></td>
-                        <td><input type="text" class="form-control input-sm src_class_user" autocomplete="off" onkeyup="searcAjax(this)" name="template"></td>
-                        <td><input type="text" class="form-control input-sm src_class_user" autocomplete="off" onkeyup="searcAjax(this)" name="postStatus"></td>
-                        <td><input type="text" class="form-control input-sm src_class_user" autocomplete="off" onkeyup="searcAjax(this)" name="slug"></td>
-                        <td><input type="text" class="form-control input-sm src_class_user" autocomplete="off" onkeyup="searcAjax(this)" name="category"></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th><input type="checkbox" class="checkall" name="checkall"></th>
-                        <th class="align-center">Title</th>
-                        <th class="align-center">Content</th>
-                        <th class="align-center">Excerpt</th>
-                        <th class="align-center">Template</th>
-                         <th class="align-center">Post Status</th>
-                          <th class="align-center">Slug</i></th>
-                        <th class="align-center">category</th>
-                        <th class="align-center">Action</th>
-                    </tr>
-                    
-                </thead>
-                <tfoot>
-                    <tr>
-                        <th></th>
-                        <th class="align-center">Title</th>
-                        <th class="align-center">Content</th>
-                        <th class="align-center">Excerpt</th>
-                        <th class="align-center">Template</th>
-                         <th class="align-center">Post Status</th>
-                          <th class="align-center">Slug</i></th>
-                        <th class="align-center">category</th>
-                        <th class="align-center">Action</th>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
-    </div>
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<div class="bg-light text-center rounded p-4">
+<div class="d-flex align-items-center justify-content-between mb-4">
+<h4 class="mb-0"><i class="clr-blue fa fa-users me-2"></i> All Post </h4>
+<button type="button" id="btnAddUser" class="btn btn-sm btn-primary m-2" data-toggle="modal" data-target="#addUser"><i class="fa fa-plus me-2"></i>Add New</button>
+</div>
+<div class="table-responsive">
+<table id="userstable" class="table text-start table-striped align-middle table-bordered table-hover mb-0">
+<thead>
+<tr>
+<td></td>
+<td><input type="text" class="form-control input-sm src_class_user" autocomplete="off" onkeyup="searcAjax(this)" name="title"></td>
+<td><input type="text" class="form-control input-sm src_class_user" autocomplete="off" onkeyup="searcAjax(this)" name="contenttt"></td>
+<td><input type="text" class="form-control input-sm src_class_user" autocomplete="off" onkeyup="searcAjax(this)" name="excerpt"></td>
+<td><input type="text" class="form-control input-sm src_class_user" autocomplete="off" onkeyup="searcAjax(this)" name="template"></td>
+<td><input type="text" class="form-control input-sm src_class_user" autocomplete="off" onkeyup="searcAjax(this)" name="postStatus"></td>
+<td><input type="text" class="form-control input-sm src_class_user" autocomplete="off" onkeyup="searcAjax(this)" name="slug"></td>
+<td><input type="text" class="form-control input-sm src_class_user" autocomplete="off" onkeyup="searcAjax(this)" name="category"></td>
+<td></td>
+</tr>
+<tr>
+<th><input type="checkbox" class="checkall" name="checkall"></th>
+<th class="align-center">Title</th>
+<th class="align-center">Content</th>
+<th class="align-center">Excerpt</th>
+<th class="align-center">Template</th>
+<th class="align-center">Post Status</th>
+<th class="align-center">Slug</i></th>
+<th class="align-center">category</th>
+<th class="align-center">Action</th>
+</tr>
+
+</thead>
+<tfoot>
+<tr>
+<th></th>
+<th class="align-center">Title</th>
+<th class="align-center">Content</th>
+<th class="align-center">Excerpt</th>
+<th class="align-center">Template</th>
+<th class="align-center">Post Status</th>
+<th class="align-center">Slug</i></th>
+<th class="align-center">category</th>
+<th class="align-center">Action</th>
+</tr>
+</tfoot>
+</table>
+</div>
+</div>
 </div>
 
 
 <!-- Modal Add -->
 <div class="modal fade" id="addpost" tabindex="-1" role="dialog" aria-labelledby="addUserTitle" aria-hidden="true">
-    <div class="modal-dialog" style="max-width: 80%;" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title title2" id="title1"></h5>
-          <button type="button" id="closemodal" class="close-modal btn btn-sm btn-danger" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form class="form-cst" enctype="multipart/form-data" >
-              <div class="input-group mb-3">
+<div class="modal-dialog" style="max-width: 80%;" role="document">
+<div class="modal-content">
+<div class="modal-header">
+<h5 class="modal-title title2" id="title1"></h5>
+<button type="button" id="closemodal" class="close-modal btn btn-sm btn-danger" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<form class="form-cst" enctype="multipart/form-data" >
+<div class="input-group mb-3">
 
-                  <span class="input-group-text" id="basic-addon1"><i class="bi bi-fonts"></i></span>
-                  <input type="text" class="form-control" id="inp" name="title" required placeholder="Title" aria-label="Title" aria-describedby="basic-addon1" autofocus>
-              </div>
-              <div class="input-grub mb-3">
-                <span class="input-group-text" id="basic-addon1"><i class="bi bi-paragraph"></i> Content</span>
-                <div id="toolbar-container">
-                  <div id="editor-container">
-                    <input type="hidden" name="content" id="content">
-                  </div>
-                </div>
-                
-              </div>
-              <div class="input-group mb-3">
-                  <span class="input-group-text" id="basic-addon1"><i class="bi bi-book-half"></i></span>
-                  <input type="text" class="form-control" id="inp" name="excerpt" required placeholder="Excerpt" aria-label="Excerpt" aria-describedby="basic-addon1">
-              </div>
+<span class="input-group-text" id="basic-addon1"><i class="bi bi-fonts"></i></span>
+<input type="text" class="form-control" id="inp" name="title" required placeholder="Title" aria-label="Title" aria-describedby="basic-addon1" autofocus>
+</div>
+<div class="input-grub mb-3">
+<span class="input-group-text" id="basic-addon1"><i class="bi bi-paragraph"></i> Content</span>
+<div id="toolbar-container">
+<div id="editor-container">
+<input type="hidden" name="content" id="content">
+</div>
+</div>
 
-              <div class="input-grub mb-3">
-                <span class="input-group-text" id="basic-addon1"><i class="bi bi-file-font-fill"></i> Template</span>
-                      <textarea id="editorcontent2" name="template" cols="320" rows="10" class="form-control ql-toolbar ql-snow"></textarea>        
-                  </div>   
-              <div class="input-group mb-3">
-                  <span class="input-group-text" id="basic-addon1"><i class="bi bi-pencil-square"></i></span>
-                  <input type="text" class="form-control" id="inp"  name="postStatus" required placeholder="Post Status" aria-label="Post Status" aria-describedby="basic-addon1">
-              </div>
-              <div class="input-group mb-3">
-                  <span class="input-group-text" id="basic-addon1"><i class="bi bi-box-arrow-up-right"></i></span>
-                  <input type="text" class="form-control" id="inp"  name="slug" required placeholder="Slug" aria-label="Slug" aria-describedby="basic-addon1">
-              </div>
-              <div class="input-group mb-3">
-                  <span class="input-group-text" id="basic-addon1"><i class="bi bi-bookmark-star-fill"></i></span>
-                  <input type="text" class="form-control" id="inp"  name="categori" required placeholder="Categori" aria-label="Categori" aria-describedby="basic-addon1">
-              </div>
-              <!-- <div class="mb-3">
-                  <label for="inp" class="form-label">Feature Image <span class="text-danger"> Max : 2mb</span>  </label>
-                  <input class="form-control form-control-sm" name="featureImage"  id="inp" type="file">
-                </div>
-                <div class="mb-3">
-                  <label for="inp" class="form-label">Banner <span class="text-danger">Max : 10mb</span></label>
-                  <input class="form-control form-control-sm" name="banner"  id="inp" type="file">
-                </div> -->
-              <div class="input-group mb-3 text-right-cst">
-                  <button type="submit" class="btn btn-sm btn-primary" id="klek" onclick="cekvalue()"><i class="fa fa-plus me-2"></i> 
-                  <span id="btn1" class="btn2">
-                  </span>
-                  
+</div>
+<div class="input-group mb-3">
+<span class="input-group-text" id="basic-addon1"><i class="bi bi-book-half"></i></span>
+<input type="text" class="form-control" id="inp" name="excerpt" required placeholder="Excerpt" aria-label="Excerpt" aria-describedby="basic-addon1">
+</div>
 
-                  <button type="button" class="btn btn-sm btn-secondary ms-2" data-bs-dismiss="modal">Close</button>
-          </button>
-          
-              </div>
-          </form>
-        </div>
-  
-        <div class="modal-footer">
-          
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="input-grub mb-3">
+<span class="input-group-text" id="basic-addon1"><i class="bi bi-file-font-fill"></i> Template</span>
+<textarea id="editorcontent2" name="template" cols="320" rows="10" class="form-control ql-toolbar ql-snow"></textarea>        
+</div>   
+<div class="input-group mb-3">
+<span class="input-group-text" id="basic-addon1"><i class="bi bi-pencil-square"></i></span>
+<input type="text" class="form-control" id="inp"  name="postStatus" required placeholder="Post Status" aria-label="Post Status" aria-describedby="basic-addon1">
+</div>
+<div class="input-group mb-3">
+<span class="input-group-text" id="basic-addon1"><i class="bi bi-box-arrow-up-right"></i></span>
+<input type="text" class="form-control" id="inp"  name="slug" required placeholder="Slug" aria-label="Slug" aria-describedby="basic-addon1">
+</div>
+<div class="input-group mb-3">
+<span class="input-group-text" id="basic-addon1"><i class="bi bi-bookmark-star-fill"></i></span>
+<input type="text" class="form-control" id="inp"  name="categori" required placeholder="Categori" aria-label="Categori" aria-describedby="basic-addon1">
+</div>
+<!-- <div class="mb-3">
+<label for="inp" class="form-label">Feature Image <span class="text-danger"> Max : 2mb</span>  </label>
+<input class="form-control form-control-sm" name="featureImage"  id="inp" type="file">
+</div>
+<div class="mb-3">
+<label for="inp" class="form-label">Banner <span class="text-danger">Max : 10mb</span></label>
+<input class="form-control form-control-sm" name="banner"  id="inp" type="file">
+</div> -->
+<div class="input-group mb-3 text-right-cst">
+<button type="submit" class="btn btn-sm btn-primary" id="klek" onclick="cekvalue()"><i class="fa fa-plus me-2"></i> 
+<span id="btn1" class="btn2">
+</span>
+
+
+<button type="button" class="btn btn-sm btn-secondary ms-2" data-bs-dismiss="modal">Close</button>
+</button>
+
+</div>
+</form>
+</div>
+
+<div class="modal-footer">
+
+</div>
+</div>
+</div>
+</div>
 
 
 <!-- Modal edit -->
 <div class="modal fade edit-post" id="edit-post" tabindex="-1" role="dialog" aria-labelledby="addUserTitle" aria-hidden="true">
-  <div class="modal-dialog" style="max-width: 80%;" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title title2" id="title1"></h5>
-        <button type="button" id="closeModalAddUser" class="close-modal btn btn-sm btn-danger close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
+<div class="modal-dialog" style="max-width: 80%;" role="document">
+<div class="modal-content">
+<div class="modal-header">
+<h5 class="modal-title title2" id="title1"></h5>
+<button type="button" id="closeModalAddUser" class="close-modal btn btn-sm btn-danger close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
 
-        <form class="form-cst" enctype="multipart/form-data" >
-            <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1"><i class="bi bi-fonts"></i></span>
-                <input type="text" class="form-control inpt-cst-add" id="title" name="title" required placeholder="Title" aria-label="Title" aria-describedby="basic-addon1">
-            </div>
+<form class="form-cst" enctype="multipart/form-data" >
+<div class="input-group mb-3">
+<span class="input-group-text" id="basic-addon1"><i class="bi bi-fonts"></i></span>
+<input type="text" class="form-control inpt-cst-add" id="title" name="title" required placeholder="Title" aria-label="Title" aria-describedby="basic-addon1">
+</div>
 
-            <div class="input-grub mb-3">
-              <span class="input-group-text" id="basic-addon1"><i class="bi bi-paragraph"></i> Content</span>
-              <input type="hidden" name="content" id="content" class="form-control inpt-cst-add">
-              <div class="toolbar-container">
-                <div id="editor-container" class="editor-container">
-                </div>
-              </div>
-            </div>
-            <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1"><i class="bi bi-book-half"></i></span>
-                <input type="text" class="form-control inpt-cst-add" id="excerpt"  name="excerpt" required placeholder="Excerpt" aria-label="Excerpt" aria-describedby="basic-addon1">
-            </div>
-            
-            <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1"><i class="bi bi-file-font-fill"></i></span>
-                <input type="text" class="form-control inpt-cst-add" id="template"  name="template" required placeholder="Template" aria-label="Template" aria-describedby="basic-addon1">
-            </div>
-            <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1"><i class="bi bi-pencil-square"></i></span>
-                <input type="text" class="form-control inpt-cst-add" id="postStatus"  name="postStatus" required placeholder="Post Status" aria-label="Post Status" aria-describedby="basic-addon1">
-            </div>
-            <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1"><i class="bi bi-box-arrow-up-right"></i></span>
-                <input type="text" class="form-control inpt-cst-add" id="slug"  name="slug" required placeholder="Slug" aria-label="Slug" aria-describedby="basic-addon1">
-            </div>
-            <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1"><i class="bi bi-bookmark-star-fill"></i></span>
-                <input type="text" class="form-control inpt-cst-add" id="categori"  name="categori" required placeholder="Categori" aria-label="Categori" aria-describedby="basic-addon1">
-            </div>
-            <!-- <div class="mb-3">
-                <label for="inp" class="form-label">Feature Image <span class="text-danger"> Max : 2mb</span>  </label>
-                <input class="form-control form-control-sm inpt-cst-add" name="featureImage"  id="inp" type="file">
-              </div>
-              <div class="mb-3">
-                <label for="inp" class="form-label">Banner <span class="text-danger">Max : 10mb</span></label>
-                <input class="form-control form-control-sm inpt-cst-add" name="banner"  id="inp" type="file">
-              </div> -->
-            <div class="input-group mb-3 text-right-cst">
-                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-plus me-2"></i> 
-                <span id="btn1" class="btn2">
-                </span>
-                <button type="button" class="btn btn-sm btn-secondary ms-2" data-bs-dismiss="modal">Close</button>
-        </button>
-        
-            </div>
-        </form>
-      </div>
+<div class="input-grub mb-3">
+<span class="input-group-text" id="basic-addon1"><i class="bi bi-paragraph"></i> Content</span>
+<input type="hidden" name="content" id="content" class="form-control inpt-cst-add">
+<div class="toolbar-container">
+<div id="editor-container" class="editor-container">
+</div>
+</div>
+</div>
+<div class="input-group mb-3">
+<span class="input-group-text" id="basic-addon1"><i class="bi bi-book-half"></i></span>
+<input type="text" class="form-control inpt-cst-add" id="excerpt"  name="excerpt" required placeholder="Excerpt" aria-label="Excerpt" aria-describedby="basic-addon1">
+</div>
 
-      <div class="modal-footer">
-        
-      </div>
-    </div>
-  </div>
+<div class="input-group mb-3">
+<span class="input-group-text" id="basic-addon1"><i class="bi bi-file-font-fill"></i></span>
+<input type="text" class="form-control inpt-cst-add" id="template"  name="template" required placeholder="Template" aria-label="Template" aria-describedby="basic-addon1">
+</div>
+<div class="input-group mb-3">
+<span class="input-group-text" id="basic-addon1"><i class="bi bi-pencil-square"></i></span>
+<input type="text" class="form-control inpt-cst-add" id="postStatus"  name="postStatus" required placeholder="Post Status" aria-label="Post Status" aria-describedby="basic-addon1">
+</div>
+<div class="input-group mb-3">
+<span class="input-group-text" id="basic-addon1"><i class="bi bi-box-arrow-up-right"></i></span>
+<input type="text" class="form-control inpt-cst-add" id="slug"  name="slug" required placeholder="Slug" aria-label="Slug" aria-describedby="basic-addon1">
+</div>
+<div class="input-group mb-3">
+<span class="input-group-text" id="basic-addon1"><i class="bi bi-bookmark-star-fill"></i></span>
+<input type="text" class="form-control inpt-cst-add" id="categori"  name="categori" required placeholder="Categori" aria-label="Categori" aria-describedby="basic-addon1">
+</div>
+<!-- <div class="mb-3">
+<label for="inp" class="form-label">Feature Image <span class="text-danger"> Max : 2mb</span>  </label>
+<input class="form-control form-control-sm inpt-cst-add" name="featureImage"  id="inp" type="file">
+</div>
+<div class="mb-3">
+<label for="inp" class="form-label">Banner <span class="text-danger">Max : 10mb</span></label>
+<input class="form-control form-control-sm inpt-cst-add" name="banner"  id="inp" type="file">
+</div> -->
+<div class="input-group mb-3 text-right-cst">
+<button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-plus me-2"></i> 
+<span id="btn1" class="btn2">
+</span>
+<button type="button" class="btn btn-sm btn-secondary ms-2" data-bs-dismiss="modal">Close</button>
+</button>
+
+</div>
+</form>
+</div>
+
+<div class="modal-footer">
+
+</div>
+</div>
+</div>
 </div>
 
 
 <!-- Modal View -->
 <div class="modal fade view-post" id="viewpost" tabindex="-1" role="dialog" aria-labelledby="addUserTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title title2">View Post</h5>
-        <button type="button" id="closeviewpost" class="close-modal btn btn-sm btn-danger close2" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
+<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header">
+<h5 class="modal-title title2">View Post</h5>
+<button type="button" id="closeviewpost" class="close-modal btn btn-sm btn-danger close2" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
 <h5><pre>
-    Title        : <span class="vmodal" name="Title"></span>
-    Content      : <span class="vmodal" name="Content"></span>
-    Excerpt      : <span class="vmodal" name="Excerpt"></span>
-    Template     : <span class="vmodal" name="Template"></span>
-    Post Status  : <span class="vmodal" name="PostStatus"></span>
-    Slug         : <span class="vmodal" name="Slug"></span>
-    Category     : <span class="vmodal" name="Category"></span>
-    </pre></h5>
-        
-      </div>
+Title        : <span class="vmodal" name="Title"></span>
+Content      : <span class="vmodal" name="Content"></span>
+Excerpt      : <span class="vmodal" name="Excerpt"></span>
+Template     : <span class="vmodal" name="Template"></span>
+Post Status  : <span class="vmodal" name="PostStatus"></span>
+Slug         : <span class="vmodal" name="Slug"></span>
+Category     : <span class="vmodal" name="Category"></span>
+</pre></h5>
 
-      <div class="modal-footer">
-           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
+</div>
+
+<div class="modal-footer">
+<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
 </div>
 
 
 <script type="text/javascript">
-    
+
 // modal add
-    $("#btnAddUser").click(function(){
-        $('#addpost').modal('show');
-        $("#title1").html("Add Post");
-        $("#btn1").html("Add Post")
-    });
+$("#btnAddUser").click(function(){
+$('#addpost').modal('show');
+$("#title1").html("Add Post");
+$("#btn1").html("Add Post")
+});
 
 
-    $("#closemodal").click(function(){
-        $("#addpost").modal('hide');
-    });
-    $(document).ready(function () {
-        var table = $('#userstable').DataTable({
-            ajax: './jsondatas/alpos.txt',
-            columnDefs: [
-                {
-                    targets: 8,
-                    data: null,
-                    defaultContent: '\
+$("#closemodal").click(function(){
+$("#addpost").modal('hide');
+});
+$(document).ready(function () {
+var table = $('#userstable').DataTable({
+ajax: './jsondatas/alpos.txt',
+columnDefs: [
+{
+targets: 8,
+data: null,
+defaultContent: '\
 <div class="btn-group" role="group">\
-    <button type="button" data-toggle="tooltip" data-placement="top" title="View" class="btn btn-sm btn-warning cview" data-target="#cview"><i class="fa fa-eye"></i></button>\
-    <button type="button" data-toggle="tooltip" data-placement="top" title="Edit" class="btn btn-sm btn-success cedit" data-target="#cedit"><i class="fa fa-edit"></i></button>\
-    <button type="button" data-toggle="tooltip" data-placement="top" title="Delete" class="btn btn-sm btn-danger cdel"><i class="fa fa-trash"></i></button>\
+<button type="button" data-toggle="tooltip" data-placement="top" title="View" class="btn btn-sm btn-warning cview" data-target="#cview"><i class="fa fa-eye"></i></button>\
+<button type="button" data-toggle="tooltip" data-placement="top" title="Edit" class="btn btn-sm btn-success cedit" data-target="#cedit"><i class="fa fa-edit"></i></button>\
+<button type="button" data-toggle="tooltip" data-placement="top" title="Delete" class="btn btn-sm btn-danger cdel"><i class="fa fa-trash"></i></button>\
 </div>',
-                }, {
-                   'targets': 0,
-                   'searchable':false,
-                   'orderable':false,
-                   'className': 'dt-body-center',
-                   'render': function (data, type, full, meta){
-                       return '<input type="checkbox" name="checkid['+full[8]+']" value="' + $('<div/>').text(data).html() + '">';
-                   }
-                }
-            ],
-            searching: false,
-        }); 
-        var getndate = getNowdate(); // helpers
-        $("#daterangepicker").val(getndate + ' - ' + getndate );
+}, {
+'targets': 0,
+'searchable':false,
+'orderable':false,
+'className': 'dt-body-center',
+'render': function (data, type, full, meta){
+return '<input type="checkbox" name="checkid['+full[8]+']" value="' + $('<div/>').text(data).html() + '">';
+}
+}
+],
+searching: false,
+}); 
+var getndate = getNowdate(); // helpers
+$("#daterangepicker").val(getndate + ' - ' + getndate );
 
 // modal Edit
 $(document).ready(function(){
-        $('#userstable tbody').on('click', '.cedit', function () {
-            var data = table.row($(this).parents('tr')).data();
-            // alert(data[8]+'edit');
-            $('.title2').html("Edit Post")
-            $('.btn2').html("Edit Post")
-            $("#closeModalAddUser").click(function(){
-            $(".edit-post").modal('hide')
-                
-    });
-               $.ajax({
-                url: "jsondatas/postbyid.txt",
-                type: "get",
-                data: {
-                    id : data[8]
-                },
-                success: function (response) {
-                    var data = JSON.parse(response);
-                   var coba= setValByName(".inpt-cst-add", data.data.main_info_user); // helpers
-                   console.log(coba)
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.log(textStatus, errorThrown);
-                }
-            });
-            $('.edit-post').modal('show');
-        });
+$('#userstable tbody').on('click', '.cedit', function () {
+var data = table.row($(this).parents('tr')).data();
+// alert(data[8]+'edit');
+$('.title2').html("Edit Post")
+$('.btn2').html("Edit Post")
+$("#closeModalAddUser").click(function(){
+$(".edit-post").modal('hide')
 
-        })
+});
+$.ajax({
+url: "jsondatas/postbyid.txt",
+type: "get",
+data: {
+id : data[8]
+},
+success: function (response) {
+var data = JSON.parse(response);
+var coba= setValByName(".inpt-cst-add", data.data.main_info_user); // helpers
+console.log(coba)
+},
+error: function(jqXHR, textStatus, errorThrown) {
+console.log(textStatus, errorThrown);
+}
+});
+$('.edit-post').modal('show');
+});
+
+})
 
 
 
 // modal View
 
 $(document).ready(function(){
-        $('#userstable tbody').on('click', '.cview', function () {
-            var data = table.row($(this).parents('tr')).data();
-            // alert(data[8]+'edit'); 
-            $("#closeviewpost").click(function(){
-                $(".view-post").modal('hide')          
-    });
-               $.ajax({
-                url: "jsondatas/viewbyid.txt",
-                type: "get",
-                data: {
-                    id : data[8]
-                },
-                success: function (response) {
-                    var data = JSON.parse(response);
-                    var coba = setValByName2(".vmodal", data.data.main_info_user); // helpers
-                   console.log(coba)
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.log(textStatus, errorThrown);
-                }
-            });
-            $('.view-post').modal('show');
-        });
+$('#userstable tbody').on('click', '.cview', function () {
+var data = table.row($(this).parents('tr')).data();
 
-        })
-
-        $('#userstable tbody').on('click', '.cdel', function () {
-            var data = table.row($(this).parents('tr')).data();
-            alert(data[8]+'delete');
-
-
-        });
-
-        $('.checkall').change(function(){
-            var cells = table.cells().nodes();
-            // var cells2 = $('.checkall').cells().nodes();
-            $( cells ).find(':checkbox').prop('checked', $(this).is(':checked'));
-            // $( cells2 ).find(':checkbox').prop('checked', $(this).is(':checked'));
-
-
-        });
-
-    });
-
-
-    $(function() {
-        $("#daterangepicker").daterangepicker({
-            timePicker: false,
-            locale: {
-              format: "DD/MM/YYYY"
-            }
-        });
-    });
-
-    function searcAjax(a){
-        
-        if($(a).val().length > global_length_src) {
-            var getparam = getAllClassAndVal("src_class_user"); // helpers
-            $('#userstable').DataTable().ajax.url("jsondatas/alposload.txt?"+getparam).load();
-        }
-        
-    }
-
-
-    // modalAdd
-
-    // var editor = new Quill('#editor');  // First matching element will be used
-
-    var toolbarOptions = [
-  ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-  ['link','blockquote', 'code-block', 'image'],
-
-  [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-  [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-  [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
-  [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
-  [{ 'direction': 'rtl' }],                         // text direction
-
-  [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-
-  [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-  [{ 'font': [] }],
-  [{ 'align': [] }],
-  // ['image'],                                         // remove formatting button
-
-  ['clean'],      
-  
-];
-const imageHandler = () => {
-  const input = document.createElement('input');
-
-  input.setAttribute('type', 'file');
-  input.setAttribute('accept', 'image/*');
-  input.click();
-
-  input.onchange = async () => {
-    const file = input.files[0];
-    const formData = new FormData();
-
-    formData.append('image', file);
-
-    // Save current cursor state
-    const range = this.quill.getSelection(true);
-
-    // Insert temporary loading placeholder image
-    this.quill.insertEmbed(range.index, 'image', `${ window.location.origin }/images/loaders/placeholder.gif`); 
-
-    // Move cursor to right side of image (easier to continue typing)
-    this.quill.setSelection(range.index + 1);
-
-    const res = await apiPostNewsImage(formData); // API post, returns image location as string e.g. 'http://www.example.com/images/foo.png'
-    
-    // Remove placeholder image
-    this.quill.deleteText(range.index, 1);
-
-    // Insert uploaded image
-    this.quill.insertEmbed(range.index, 'image', res.body.image); 
-  }};
-    var options = {
-        debug: 'info',
-        modules: {
-          toolbar: {
-            container:toolbarOptions,
-            handlers: {
-            image: this.imageHandler,
-            'link': function(value) {
-                    if (value) {
-                      var href = prompt('Enter the URL');
-                      this.quill.format('link', href);
-                    } else {
-                      this.quill.format('link', false);
-                    }
-                  }
-          }
-        },
-        },
-        placeholder: 'Content... ',
-        readOnly: false,
-        theme: 'snow'
-      };
-      
-      var editor = new Quill('#editor-container', options);
-
-      var editor2 = new Quill('.editor-container', options);
-
-      editor2.on('text-change', function (delta, oldDelta, source) {
-      document.querySelector("input[name='content']").value = editor2.root.innerHTML;
-      
-    });
-
-
-    editor2.insertText(0, 'Marketing');
-    
-
-
-      function cekvalue(){
-          var myEditor = document.querySelector('#editor-container')
-          var html = myEditor.children[0].innerHTML
-        $('#klek').on('click', function(e){
-        // console.log(imageHandler)
-        
- 
-
-        
-            this.href = URL.createObjectURL(
-                new Blob([document.documentElement.outerHTML] , {type:'text/html'}) 
-  );
-  var encodedStringAtoB = html;
-        
-        // Decode the String
-        // var decodedStringAtoB = btoa(encodedStringAtoB);
-
-        var cob= atob(encodedStringAtoB)
-        
-        console.log(cob);
+$("#closeviewpost").click(function(){
+$(".view-post").modal('hide')          
 });
-      };
-    //  console.log(html)
-       
+$.ajax({
+url: "jsondatas/viewbyid.txt",
+type: "get",
+data: {
+id : data[8]
+},
+success: function (response) {
+var data = JSON.parse(response);
+var coba = setValByName2(".vmodal", data.data.main_info_user); // helpers
+console.log(coba)
+},
+error: function(jqXHR, textStatus, errorThrown) {
+console.log(textStatus, errorThrown);
+}
+});
+$('.view-post').modal('show');
+});
 
-    /**
- * Converts an image to a dataURL
- * @param  {String}   src          The src of the image
- * @param  {Function} callback     
- * @param  {String}   outputFormat [outputFormat='image/png']
- * @url   https://gist.github.com/HaNdTriX/7704632/
- * @docs  https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement#Methods
- * @author HaNdTriX
- * @example
- * 
- *   toDataUrl('http://goo.gl/AOxHAL', function(base64Img){
- *     console.log('IMAGE:',base64Img);
- *   })
- * 
-//  */
-// function toDataUrl(src, callback, outputFormat) {
-//       var myEditor = document.querySelector('#editor-container')
-//         var html = myEditor.children[0].innerHTML
-//   // Create an Image object
-//   var img = new Image();
-//   // Add CORS approval to prevent a tainted canvas
-//   img.crossOrigin = 'Anonymous';
-//   img.onload = function() {
-//     // Create an html canvas element
-//     var canvas = document.createElement('CANVAS');
-//     // Create a 2d context
-//     var ctx = canvas.getContext('2d');
-//     var dataURL;
-//     // Resize the canavas to the original image dimensions
-//     canvas.height = this.naturalHeight;
-//     canvas.width = this.naturalWidth;
-//     // Draw the image to a canvas
-//     ctx.drawImage(this, 0, 0);
-//     // Convert the canvas to a data url
-//     dataURL = canvas.toDataURL(outputFormat);
-//     // Return the data url via callback
-//     callback(dataURL);
-//     // Mark the canvas to be ready for garbage 
-//     // collection
-//     canvas = null;
-//   };
-//   // Load the image
-//   img.src = src;
-//   // make sure the load event fires for cached images too
-//   if (img.complete || img.complete === undefined) {
-//     // Flush cache
-//     img.src = gambar(html);
-//     // Try again
-//     img.src = src;
+})
 
-//     console.log(img.src)
-//   }
-// }
-
-              
-        function gambar(html){
-
-          const regex = /src="(.+?)">/gm;
-
-          // Alternative syntax using RegExp constructor
-          // const regex = new RegExp('src="(.+?)">', 'gm')
-          // const str = `<p>hkjaskjdqwrqjlkqrqw <img src="www"> <h2>kal12421312412kjlksdas</h2>`;
-          let m;
-
-          while ((m = regex.exec(html)) !== null) {
-              // This is necessary to avoid infinite loops with zero-width matches
-              if (m.index === regex.lastIndex) {
-                  regex.lastIndex++;
-              }
-              
-              // The result can be accessed through the `m`-variable.
-              m.forEach((match, groupIndex) => {
-                  console.log(`Found match, group ${groupIndex}: ${match}`);
-              });
-              
-          }
+$('#userstable tbody').on('click', '.cdel', function () {
+var data = table.row($(this).parents('tr')).data();
+alert(data[8]+'delete');
 
 
-        }
+});
 
-        
+$('.checkall').change(function(){
+var cells = table.cells().nodes();
+// var cells2 = $('.checkall').cells().nodes();
+$( cells ).find(':checkbox').prop('checked', $(this).is(':checked'));
 
+});
 
-
-  // modalEdit
-
-  // var options = {
-  //       debug: 'info',
-  //       modules: {
-  //         toolbar: toolbarOptions
-  //       },
-  //       placeholder: 'Content... ',
-  //       readOnly: false,
-  //       theme: 'snow'
-  //     };
-  //     var editor = new Quill('#editor' + '.edi', options);
-  //     quill.on('text-change', function (delta, oldDelta, source) {
-  //   document.querySelector("input[name='content']").value = quill.root.innerHTML;
-  // });
+});
 
 
-  // var quill = new Quill('#editor-container', {
-  //   modules: {
-  //     syntax: true,
-  //     toolbar: '#toolbar-container'
-  //   },
-  //   placeholder: 'Compose an epic...',
-  //   theme: 'snow'
-  // });
+$(function() {
+$("#daterangepicker").daterangepicker({
+timePicker: false,
+locale: {
+format: "DD/MM/YYYY"
+}
+});
+});
+
+function searcAjax(a){
+
+if($(a).val().length > global_length_src) {
+var getparam = getAllClassAndVal("src_class_user"); // helpers
+$('#userstable').DataTable().ajax.url("jsondatas/alposload.txt?"+getparam).load();
+}
+
+}
+
+
+// modalAdd
+
+var toolbarOptions = [
+['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+['link','blockquote', 'code-block', 'image'],
+
+[{ 'header': 1 }, { 'header': 2 }],               // custom button values
+[{ 'list': 'ordered'}, { 'list': 'bullet' }],
+[{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+[{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+[{ 'direction': 'rtl' }],                         // text direction
+
+[{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+[{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+[{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+[{ 'font': [] }],
+[{ 'align': [] }],
+// ['image'],                                         // remove formatting button
+
+['clean'],      
+
+];
+
+var options = {
+debug: 'info',
+modules: {
+toolbar: {
+container:toolbarOptions,
+handlers: {
+
+'link': function(value) {
+if (value) {
+var href = prompt('Enter the URL');
+this.quill.format('link', href);
+} else {
+this.quill.format('link', false);
+}
+}
+}
+},
+},
+placeholder: 'Content... ',
+readOnly: false,
+theme: 'snow'
+};
+
+var editor = new Quill('#editor-container', options);
+
+var editor2 = new Quill('.editor-container', options);
+
+editor2.on('text-change', function (delta, oldDelta, source) {
+document.querySelector("input[name='content']").value = editor2.root.innerHTML;
+
+});
+
+
+editor2.insertText(0, 'Marketing');
+
+function cekvalue(){
+
+
+var myEditor = document.querySelector('#editor-container');
+var html = myEditor.children[0].innerHTML;
+
+
+gambar(html);
+
+};
+
+function gambar(html){
+
+const regex = /src="(.+?)">/gm;
+
+const m2  = [];
+let m;
+
+while ((m = regex.exec(html)) !== null) {
+
+if (m.index === regex.lastIndex) {
+regex.lastIndex++;
+}
+var coco = m[1]
+
+//   console.log(m[1]);
+$.ajax({
+url: "http://localhost/dashboard_admin/push-master/uploadfile.php",
+type: "post",
+data: {
+data : m[1]
+},
+success: function (response) {
+var img2= 'http://localhost/dashboard_admin/push-master/' + response; 
+m2.push(img2);
+
+var strImage = html.replace(coco, m2);
+
+console.log(strImage);
+},
+error: function(jqXHR, textStatus, errorThrown) {
+console.log(textStatus, errorThrown);
+}
+});
+
+}
+}
 
 </script>
